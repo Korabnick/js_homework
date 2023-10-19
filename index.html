@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chuck Norris Jokes</title>
+    <style>
+        /* Стили для красоты */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Chuck Norris Jokes</h1>
+        <select id="category">
+            <option value="animal">Animal</option>
+            <option value="career">Career</option>
+            <option value="celebrity">Celebrity</option>
+            <option value="dev">Dev</option>
+            <option value="fashion">Fashion</option>
+            <option value="food">Food</option>
+            <option value="history">History</option>
+            <option value="money">Money</option>
+            <option value="movie">Movie</option>
+            <option value="music">Music</option>
+            <option value="science">Science</option>
+            <option value="sport">Sport</option>
+        </select>
+        <button onclick="getChuckNorrisJoke()">Get Joke</button>
+        <p id="joke"></p>
+    </div>
+
+    <script>
+        // Функция для выполнения запроса к API и отображения данных
+        function getChuckNorrisJoke() {
+            const category = document.getElementById('category').value;
+            fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
+                .then(response => response.json())
+                .then(data => {
+                    const jokeElement = document.getElementById('joke');
+                    jokeElement.textContent = data.value;
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении шутки:', error);
+                });
+        }
+    </script>
+</body>
+</html>
