@@ -25,6 +25,7 @@
     <div id="container">
         <h1>Chuck Norris Jokes</h1>
         <select id="category">
+            <option value="random">Random</option>
             <option value="animal">Animal</option>
             <option value="career">Career</option>
             <option value="celebrity">Celebrity</option>
@@ -46,7 +47,11 @@
         // Функция для выполнения запроса к API и отображения данных
         function getChuckNorrisJoke() {
             const category = document.getElementById('category').value;
-            fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
+            let apiUrl = `https://api.chucknorris.io/jokes/random`;
+            if (category !== "random") {
+                apiUrl += `?category=${category}`;
+            }
+            fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     const jokeElement = document.getElementById('joke');
